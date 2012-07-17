@@ -1,0 +1,44 @@
+input.search {
+	border: 2px solid #9AC336;
+	width: 850px;
+	font-family: monospace;
+	background-color: whitesmoke;
+	font-size: 35px;
+	font-style: italic;
+	color: graytext;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
+
+div.playlist {
+	position: absolute;
+	top: 5px;
+	left: 1000px;
+	height: 1000px;
+	width: 300px;
+	border: 1px solid #9AC336;
+	font-family: sans-serif;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
+
+div.result-statistics {
+	position: absolute;
+	left: 20px;
+	top: 77px;
+	font-family: monospace;
+	color: #9AC336;
+}
+
+div.results {
+	position: absolute;
+	left: 5px;
+	top: 95px;
+	width: 925px;
+	height: 910px;
+	border: 1px solid #9AC336;
+	font-family: sans-serif;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	overflow: scroll;
+}

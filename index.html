@@ -1,0 +1,31 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript" src="scripts/rest-commons.js"></script>
+<script type="text/javascript" src="scripts/gapi-client.js"></script>
+<script type="text/javascript" src="scripts/playlistctrl.js"></script>
+<link rel="stylesheet" href="styles/index.css" type="text/css" />
+</head>
+<body>
+    <table>
+        <tr>
+            <td><input class="search" id="q" type="text" value="type search here" onclick="this.value=''" /></td>
+            <td><img alt="go" style="height: 64px; cursor: pointer;" src="images/search.png"
+                onclick="find(document.getElementById('q').value);" /></td>
+        </tr>
+    </table>
+    <div id="result-statistics" class="result-statistics"></div>
+    <div class="results">
+        <table id="results" style="font-family: sans-serif;" cellpadding="5px"></table>
+    </div>
+    <div class="playlist">
+        <table id="playlist" style="overflow: scroll;" cellpadding="5px">
+            <tr>
+                <td colspan="2"><H2>Playlist</H2></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
+
