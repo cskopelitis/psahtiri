@@ -4,13 +4,14 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript" src="scripts/rest-commons.js"></script>
 <script type="text/javascript" src="scripts/gapi-client.js"></script>
+<script type="text/javascript" src="scripts/searchbox.js"></script>
 <script type="text/javascript" src="scripts/playlistctrl.js"></script>
 <link rel="stylesheet" href="styles/index.css" type="text/css" />
 </head>
 <body>
     <table>
         <tr>
-            <td><input class="search" id="q" type="text" value="type search here" onclick="this.value=''" /></td>
+            <td><input class="search" id="q" type="text" value="type search here" onkeydown="onKeyDown()" onclick="this.value=''" /></td>
             <td><img alt="go" style="height: 64px; cursor: pointer;" src="images/search.png"
                 onclick="find(document.getElementById('q').value);" /></td>
         </tr>
