@@ -9,24 +9,23 @@
 <link rel="stylesheet" href="styles/index.css" type="text/css" />
 </head>
 <body>
-    <table>
-        <tr>
-            <td><input class="search" id="q" type="text" value="type search here" onkeydown="onKeyDown()" onclick="this.value=''" /></td>
-            <td><img alt="go" style="height: 64px; cursor: pointer;" src="images/search.png"
-                onclick="find(document.getElementById('q').value);" /></td>
-        </tr>
+  <table>
+    <tr>
+      <td><input class="search" id="q" type="text" value="type search here" onkeydown="onKeyDown(event)" onclick="this.value=''" /></td>
+      <td><img alt="go" style="height: 64px; cursor: pointer;" src="images/search.png" onclick="find(document.getElementById('q').value);" /></td>
+    </tr>
+  </table>
+  <div id="result-statistics" class="result-statistics"></div>
+  <div class="results">
+    <table id="results" style="font-family: sans-serif;" cellpadding="5px"></table>
+  </div>
+  <div class="playlist">
+    <table id="playlist">
+      <tr>
+        <td><H2>Playlist</H2></td>
+      </tr>
     </table>
-    <div id="result-statistics" class="result-statistics"></div>
-    <div class="results">
-        <table id="results" style="font-family: sans-serif;" cellpadding="5px"></table>
-    </div>
-    <div class="playlist">
-        <table id="playlist" style="overflow: scroll;" cellpadding="5px">
-            <tr>
-                <td colspan="2"><H2>Playlist</H2></td>
-            </tr>
-        </table>
-    </div>
+  </div>
 </body>
 </html>
 
