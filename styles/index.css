@@ -30,12 +30,12 @@ div.playlist-title {
 
 div.playlist-item {
 	border-bottom: 1px #9AC336;
-	border-bottom-style:dotted;
+	border-bottom-style: dotted;
 	position: relative;
-    left:5px;
-    width: 288px;
-    font-family:sans-serif;
-    font-size: 12px;
+	left: 5px;
+	width: 288px;
+	font-family: sans-serif;
+	font-size: 12px;
 }
 
 div.result-statistics {
@@ -51,10 +51,32 @@ div.results {
 	left: 5px;
 	top: 95px;
 	width: 925px;
-	height: 910px;
+	height: 835px;
 	border: 1px solid #9AC336;
 	font-family: sans-serif;
 	-moz-border-radius: 10px;
 	border-radius: 10px;
 	overflow: scroll;
+}
+
+div.results-footer {
+	position: absolute;
+	left: 5px;
+	top: 945px;
+	height: 60px;
+	width: 925px;
+	border: 1px solid #9AC336;
+	font-family: sans-serif;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	width: 925px;
+}
+
+div.results-pages {
+	font-family: monospace;
+	font-size: 30px;
+	position: relative;
+	top: 15px;
+	left: 260px;
+	width: 365px
 }

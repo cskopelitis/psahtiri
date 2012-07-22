@@ -3,6 +3,6 @@ function onKeyDown(event) {
 	var keyCode = event.keyCode;
 
 	if (keyCode == 13) { // enter
-		find(document.getElementById('q').value);
+		search(document.getElementById('q').value, 1);
 	}
 }

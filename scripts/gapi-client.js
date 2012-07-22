@@ -1,13 +1,11 @@
-var GAPIKEY = 'AIzaSyD0JKAnX-V_gHFVCmFAT280nNabDjFEaQU';
-var GCSEKEY = '015915445257339081583:eem8ou0pmbq';
+function buildQuery(queryString, start) {
+	return 'https://www.googleapis.com/customsearch/v1?q=' + queryString
+			+ '&cx=' + GCSEKEY + '&filter=1&safe=medium&start=' + start
+			+ '&key=' + GAPIKEY;
+}
 
-function find(queryString) {
-	// TODO URL encode request params?
-	var requestUrl = 'https://www.googleapis.com/customsearch/v1?q='
-			+ queryString + '&cx=' + GCSEKEY + '&filter=1&safe=medium&key='
-			+ GAPIKEY;
-
-	restGet(requestUrl, onResponse);
+function search(queryString, startIndex) {
+	restGet(buildQuery(queryString, startIndex), onResponse);
 }
 
 function onResponse(results, textStatus, jqXHR) {
@@ -64,6 +62,36 @@ function buildEmbedUrl(source, embedUrl) {
 	return embedUrl;
 }
 function drawFooter(results) {
+	$('#results-pages').empty();
+
+	var current = results.queries['request'][0];
+	var next = results.queries['nextPage'][0];
+	var previous = results.queries['previousPage'];
+
+	var html = '';
+	if (previous) {
+		previous = previous[0];
+		html += pageInfoToAhref(previous, '<') + '&nbsp;';
+	}
+
+	var pageNumber = Math.floor(current.startIndex / current.count);
+	html += '<b style="font-size:40px">' + pageNumber + '&nbsp;</b>';
+
+	for ( var pageIndex = pageNumber + 1; pageIndex < pageNumber + 10; pageNumber++) {
+		html += pageInfoToAhref({
+			searchTearms : current.searchTearms,
+			startIndex : (pageIndex * current.count) + 1
+		}, pageIndex) + '&nbsp;';
+	}
+	html += pageInfoToAhref(next, '>') + '&nbsp;';
+
+	$('#results-pages').append(html);
+}
+
+function pageInfoToAhref(pageInfo, title) {
+	return '<span style="cursor:pointer" onclick="search(\''
+			+ pageInfo.searchTearms + '\',' + pageInfo.startIndex + ')">'
+			+ title + '</span>';
 }
 
 function isVideo(item) {
