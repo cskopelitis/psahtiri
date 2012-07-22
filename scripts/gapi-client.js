@@ -42,7 +42,7 @@ function drawItem(item) {
 				+ thumbnailImg + '"/></td>';
 		innerHtml += '<td><a href="">' + item.htmlTitle + '</a></td>';
 		innerHtml += '<td><img src="images/add.png" style="cursor: pointer;height:32px" onclick="Playlist.add(\''
-				+ item.htmlTitle
+				+ escape(item.htmlTitle)
 				+ '\',\''
 				+ buildEmbedUrl(item.displayLink, embedUrl) + '\')"/></td>';
 		innerHtml += '</tr>';

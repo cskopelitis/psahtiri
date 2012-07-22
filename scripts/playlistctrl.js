@@ -4,7 +4,7 @@ Playlist.items = Array();
 
 Playlist.add = function(title, embedUrl) {
 	var playlistItem = {
-		title : title,
+		title : unescape(title),
 		embedUrl : embedUrl
 	};
 	itemIndex = Playlist.items.push(playlistItem);
@@ -12,8 +12,9 @@ Playlist.add = function(title, embedUrl) {
 };
 
 Playlist.draw = function() {
-	$('#playlist tr').remove();
-	$('#playlist').append('<tr><td><H2>Playlist</H2></td></tr>');
+	$('#playlist div').remove();
+	$('#playlist')
+			.append('<div class="playlist-title"><H2>Playlist</H2></div>');
 
 	$.each(Playlist.items, function(itemIndex, item) {
 		Playlist.drawItem(itemIndex, item);
@@ -21,24 +22,35 @@ Playlist.draw = function() {
 };
 
 Playlist.drawItem = function(itemIndex, playlistItem) {
-	html = '<tr id="item' + itemIndex + '">';
-	html += '<td rowspan="2"><iframe width="120px" height="90px" src="'
-			+ playlistItem.embedUrl
-			+ '" frameborder="0" mozallowfullscreen allowFullScreen"></iframe></td>';
-	html += '<td style="text-align:right;">';
-	html += '<img style="cursor:pointer" src="images/trash.gif" onclick="Playlist.remove('
-			+ itemIndex + ');"/>';
-	html += '</td>';
-	html += '</tr><tr>';
-	html += '<td style="border-bottom: 1px solid #9AC336">'
-			+ playlistItem.title;
-	html += '</td>';
+	html = '<div class="playlist-item" id="pli' + itemIndex
+			+ '" onmouseover="Playlist.onMouseOver(' + itemIndex
+			+ ');" onmouseout="Playlist.onMouseOut(' + itemIndex + ');">';
+	html += '<table cellspacing="2">';
+	html += '<tr>';
+	html += '<td style="height:95px" rowspan="2"><iframe height="90px" frameborder="0" width="120px" allowfullscreen="" mozallowfullscreen="" src="'
+			+ playlistItem.embedUrl + '"></iframe></td>';
+	html += '<td style="text-align:right;height:25px;color:white">dummy<img onclick="Playlist.remove('
+			+ itemIndex
+			+ ');" src="images/trash.png" style="cursor:pointer;display:none;"></td>';
 	html += '</tr>';
+	html += '<tr>';
+	html += '<td style="height:70px">' + playlistItem.title + '</td>';
+	html += '</tr>';
+	html += '</table>';
+	html += '</div>';
 
 	$('#playlist').append(html);
 };
 
 Playlist.remove = function(itemIndex) {
 	Playlist.items.splice(itemIndex, 1);
-	Playlist.draw();
+	$('#pli' + itemIndex).remove();
+};
+
+Playlist.onMouseOver = function(index) {
+	$('#pli' + index).find('img').first().css('display', 'inline');
+};
+
+Playlist.onMouseOut = function(index) {
+	$('#pli' + index).find('img').first().css('display', 'none');
 };

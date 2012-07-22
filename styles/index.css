@@ -22,6 +22,22 @@ div.playlist {
 	border-radius: 10px;
 }
 
+div.playlist-title {
+	position: relative;
+	left: 10px;
+	font: 25px monospace;
+}
+
+div.playlist-item {
+	border-bottom: 1px #9AC336;
+	border-bottom-style:dotted;
+	position: relative;
+    left:5px;
+    width: 288px;
+    font-family:sans-serif;
+    font-size: 12px;
+}
+
 div.result-statistics {
 	position: absolute;
 	left: 20px;
