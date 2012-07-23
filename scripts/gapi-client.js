@@ -62,38 +62,40 @@ function buildEmbedUrl(source, embedUrl) {
 	return embedUrl;
 }
 function drawFooter(results) {
-	$('#results-pages').empty();
+	var pagesJqEl = $('#results-pages');
+	pagesJqEl.empty();
 
 	var current = results.queries['request'][0];
 	var next = results.queries['nextPage'][0];
 	var previous = results.queries['previousPage'];
 
-	var html = '';
 	if (previous) {
 		previous = previous[0];
-		html += pageInfoToAhref(previous, '<') + '&nbsp;';
+		pagesJqEl.append(pageInfoToAhref(previous, '<') + '&nbsp;', previous);
 	}
+	
 
 	var pageNumber = Math.floor(current.startIndex / current.count);
-	html += '<b style="font-size:40px">' + pageNumber + '&nbsp;</b>';
+	pagesJqEl
+			.append('<b style="font-size:40px">' + ++pageNumber + '&nbsp;</b>');
 
-	for ( var pageIndex = pageNumber + 1; pageIndex < pageNumber + 10; pageNumber++) {
-		var searchTerms = current.searchTerms;
-		var startIdx = (pageIndex * current.count) + 1;
-		html += pageInfoToAhref({
-			'searchTerms' : searchTerms,
-			'startIndex' : startIdx
-		}, pageIndex) + '&nbsp;';
-	}
-	html += pageInfoToAhref(next, '>') + '&nbsp;';
-
-	$('#results-pages').append(html);
+	// TODO too slow; figure out why
+	// for ( var pageIndex = pageNumber; pageIndex < pageNumber + 10;
+	// pageNumber++) {
+	// var searchTerms = current.searchTerms;
+	// var startIdx = (pageIndex * current.count) + 1;
+	// pagesJqEl.append(pageInfoToAhref({
+	// 'searchTerms' : searchTerms,
+	// 'startIndex' : startIdx
+	// }, pageIndex) + '&nbsp;');
+	// }
+	pagesJqEl.append(pageInfoToAhref(next, '>') + '&nbsp;');
 }
 
-function pageInfoToAhref(pageInfo, title) {
-	return '<span style="cursor:pointer" onclick="search(\''
-			+ pageInfo.searchTerms + '\',' + pageInfo.startIndex + ')">'
-			+ title + '</span>';
+function pageInfoToAhref(pageInfo, title, hide) {
+	return '<span style="cursor:pointer;color:' + (!hide ? 'inherit' : 'white')
+			+ '" onclick="search(\'' + pageInfo.searchTerms + '\','
+			+ pageInfo.startIndex + ')">' + title + '</span>';
 }
 
 function isVideo(item) {
