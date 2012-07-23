@@ -13,7 +13,7 @@
 <body onload="Playlist.draw();">
     <table>
         <tr>
-            <td><input class="search" id="q" type="text" value="type search here" onkeydown="onKeyDown(event)"
+            <td><input class="search" id="q" type="text" value="type search here" onkeydown="SearchBox.onKeyDown(event)"
                 onclick="this.value=''" /></td>
             <td><img alt="go" style="height: 64px; cursor: pointer;" src="images/search.png"
                 onclick="search(document.getElementById('q').value,1);" /></td>

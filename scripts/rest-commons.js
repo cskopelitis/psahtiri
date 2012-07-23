@@ -1,47 +1,58 @@
-function restGet(url, successCallback) {
-    restCall(url, 'GET', successCallback);
-}
+/**
+ * Generic JSON RESTful client.
+ * 
+ * @author cskopelitis
+ */
+var JsonClient = {};
 
-function restPost(url, jsonBody, successCallback) {
-    restCallWithBody(url, 'POST', jsonBody, successCallback);
-}
+JsonClient.get = function(url, successCallback) {
+	JsonClient.restCall(url, 'GET', successCallback);
+};
 
-function restPut(url, jsonBody, successCallback) {
-    restCallWithBody(url, 'PUT', jsonBody, successCallback);
-}
+JsonClient.post = function(url, jsonBody, successCallback) {
+	JsonClient.restCallWithBody(url, 'POST', jsonBody, successCallback);
+};
 
-function restDelete(url, successCallback) {
-    restCall(url, 'DELETE', successCallback);
-}
+JsonClient.put = function(url, jsonBody, successCallback) {
+	JsonClient.restCallWithBody(url, 'PUT', jsonBody, successCallback);
+};
 
-function restCall(url, method, successCallback) {
-    $.ajax({
-        url:url,
-        type:method,
-        dataType:'json',
-        success:successCallback,
-        error:onError,
-        beforeSend:onBeforeSend
-    });
-}
+JsonClient.del = function(url, successCallback) {
+	JsonClient.restCall(url, 'DELETE', successCallback);
+};
 
-function restCallWithBody(url, method, jsonBody, successCallback) {
-    $.ajax({
-        url:url,
-        type:method,
-        dataType:'json',
-        data:JSON.stringify(jsonBody),
-        success:successCallback,
-        error:onError,
-        beforeSend:onBeforeSend
-    });
-}
+/**
+ * @param method
+ *            GET, POST, PUT, DELETE
+ */
+JsonClient.restCall = function(url, method, successCallback) {
+	$.ajax({
+		url : url,
+		type : method,
+		dataType : 'json',
+		success : successCallback,
+		error : JsonClient.onError,
+		beforeSend : JsonClient.onBeforeSend
+	});
+};
 
-function onError(jqXHR, textStatus, errorThrown) {
-    alert(errorThrown);
-}
+JsonClient.restCallWithBody = function(url, method, jsonBody, successCallback) {
+	$.ajax({
+		url : url,
+		type : method,
+		dataType : 'json',
+		data : JSON.stringify(jsonBody),
+		success : successCallback,
+		error : JsonClient.onError,
+		beforeSend : JsonClient.onBeforeSend
+	});
+};
 
-function onBeforeSend(jqXHR) {
-    jqXHR.setRequestHeader('Accept', 'application/json');
-    jqXHR.setRequestHeader('Content-Type', 'application/json');
-}
+JsonClient.onError = function(jqXHR, textStatus, errorThrown) {
+	alert(errorThrown);
+};
+
+JsonClient.onBeforeSend = function(jqXHR) {
+	jqXHR.setRequestHeader('Accept', 'application/json');
+	jqXHR.setRequestHeader('Content-Type', 'application/json');
+};
