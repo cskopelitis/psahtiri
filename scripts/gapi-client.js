@@ -78,9 +78,11 @@ function drawFooter(results) {
 	html += '<b style="font-size:40px">' + pageNumber + '&nbsp;</b>';
 
 	for ( var pageIndex = pageNumber + 1; pageIndex < pageNumber + 10; pageNumber++) {
+		var searchTerms = current.searchTerms;
+		var startIdx = (pageIndex * current.count) + 1;
 		html += pageInfoToAhref({
-			searchTearms : current.searchTearms,
-			startIndex : (pageIndex * current.count) + 1
+			'searchTerms' : searchTerms,
+			'startIndex' : startIdx
 		}, pageIndex) + '&nbsp;';
 	}
 	html += pageInfoToAhref(next, '>') + '&nbsp;';
@@ -90,7 +92,7 @@ function drawFooter(results) {
 
 function pageInfoToAhref(pageInfo, title) {
 	return '<span style="cursor:pointer" onclick="search(\''
-			+ pageInfo.searchTearms + '\',' + pageInfo.startIndex + ')">'
+			+ pageInfo.searchTerms + '\',' + pageInfo.startIndex + ')">'
 			+ title + '</span>';
 }
 
