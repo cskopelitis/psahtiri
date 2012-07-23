@@ -5,12 +5,14 @@ function buildQuery(queryString, start) {
 }
 
 function search(queryString, startIndex) {
+	$('#loading').css('display', 'inline');
+	$('#results tr').remove();
 	restGet(buildQuery(queryString, startIndex), onResponse);
 }
 
 function onResponse(results, textStatus, jqXHR) {
+	$('#loading').css('display', 'none');
 	drawHeader(results);
-	$('#results tr').remove();
 	$.each(results.items, function(index, val) {
 		if (isVideo(val)) {
 			drawItem(val);
@@ -73,7 +75,6 @@ function drawFooter(results) {
 		previous = previous[0];
 		pagesJqEl.append(pageInfoToAhref(previous, '<') + '&nbsp;', previous);
 	}
-	
 
 	var pageNumber = Math.floor(current.startIndex / current.count);
 	pagesJqEl
